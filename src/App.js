@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
 
-import CourseGoalList from './components/CourseGoals/CourseGoalList/CourseGoalList';
-import CourseInput from './components/CourseGoals/CourseInput/CourseInput';
+import ListList from './components/ListToDo/ListList/ListList';
+import ListInput from './components/ListToDo/ListInput/ListInput';
 import './App.css';
 
 const App = () => {
-  const [courseGoals, setCourseGoals] = useState([
+  const [LisToDo, setLisToDo] = useState([
     { text: 'Do all exercises!', id: 'g1' },
     { text: 'Finish the course!', id: 'g2' }
   ]);
 
   const addGoalHandler = enteredText => {
-    setCourseGoals(prevGoals => {
-      const updatedGoals = [...prevGoals];
-      updatedGoals.unshift({ text: enteredText, id: Math.random().toString() });
-      return updatedGoals;
+    setLisToDo(prevGoals => {
+      const updatedTask = [...prevGoals];
+      updatedTask.unshift({ text: enteredText, id: Math.random().toString() });
+      return updatedTask;
     });
   };
 
-  const deleteItemHandler = goalId => {
-    setCourseGoals(prevGoals => {
-      const updatedGoals = prevGoals.filter(goal => goal.id !== goalId);
-      return updatedGoals;
+  const deleteItemHandler = taskId => {
+    setLisToDo(prevGoals => {
+      const updatedTask = prevGoals.filter(task => task.id !== taskId);
+      return updatedTask;
     });
   };
 
@@ -29,18 +29,20 @@ const App = () => {
     <p style={{ textAlign: 'center' }}>No goals found. Maybe add one?</p>
   );
 
-  if (courseGoals.length > 0) {
+  if (LisToDo.length > 0) {
     content = (
-      <CourseGoalList items={courseGoals} onDeleteItem={deleteItemHandler} />
+      <ListList items={LisToDo} 
+                onDeleteItem={deleteItemHandler} 
+                />
     );
   }
 
   return (
     <div>
-      <section id="goal-form">
-        <CourseInput onAddGoal={addGoalHandler} />
+      <section id="tasks-form">
+        <ListInput onAddTask={addGoalHandler} />
       </section>
-      <section id="goals">
+      <section id="tasks">
         {content}
         {/* {courseGoals.length > 0 && (
           <CourseGoalList
