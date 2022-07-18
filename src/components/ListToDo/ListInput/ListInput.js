@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 
 import Button from '../../UI/Button/Button';
-import './ListInput.css';
+import styles from './ListInput.module.css';
 
-const FormControl = styled.div`
-
-  margin: 0.5rem 0;
+//const FormControl = styled.div`
+/*
+margin: 0.5rem 0;
 
 & label {
   font-weight: bold;
@@ -31,6 +30,7 @@ const FormControl = styled.div`
   border-color: #000080;
 }
 `;
+*/
 
 const ListInput = props => {
   const [enteredTask, setEnteredTask] = useState('');
@@ -54,11 +54,12 @@ const ListInput = props => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <FormControl invalid={!isValid}> 
+      <div 
+        className={`${styles['form-control']} ${!isValid && styles.invalid}`}> 
         <label>List to Do:</label>
         <input type="text" 
               onChange={listInputChangeHandler} />
-      </FormControl>
+      </div>
       <Button type="submit">Add Task</Button>
     </form>
   );
