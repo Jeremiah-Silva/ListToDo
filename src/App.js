@@ -10,17 +10,17 @@ const App = () => {
     { text: 'Finish the course!', id: 'g2' }
   ]);
 
-  const addGoalHandler = enteredText => {
-    setLisToDo(prevGoals => {
-      const updatedTask = [...prevGoals];
+  const addTaskHandler = enteredText => {
+    setLisToDo(prevTasks => {
+      const updatedTask = [...prevTasks];
       updatedTask.unshift({ text: enteredText, id: Math.random().toString() });
       return updatedTask;
     });
   };
 
-  const deleteItemHandler = taskId => {
-    setLisToDo(prevGoals => {
-      const updatedTask = prevGoals.filter(task => task.id !== taskId);
+  const deleteTaskHandler = taskId => {
+    setLisToDo(prevTasks => {
+      const updatedTask = prevTasks.filter(task => task.id !== taskId);
       return updatedTask;
     });
   };
@@ -32,7 +32,7 @@ const App = () => {
   if (LisToDo.length > 0) {
     content = (
       <ListList items={LisToDo} 
-                onDeleteItem={deleteItemHandler} 
+                onDeleteItem={deleteTaskHandler} 
                 />
     );
   }
@@ -40,7 +40,7 @@ const App = () => {
   return (
     <div>
       <section id="tasks-form">
-        <ListInput onAddTask={addGoalHandler} />
+        <ListInput onAddTask={addTaskHandler} />
       </section>
       <section id="tasks">
         {content}
